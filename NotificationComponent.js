@@ -3,45 +3,46 @@ import { HubConnectionBuilder } from '@microsoft/signalr';
 
 class NotificationComponent extends LitElement {
   static styles = css`
-  .icon-button {
-    background: #f0f0f0; /* light gray background */
-    border: 1px solid #ccc; /* gray border */
-    border-radius: 50%; /* make it round */
-    padding: 10px; /* space around the icon */
-    cursor: pointer;
-    outline: none;
-    transition: background 0.3s ease; /* transition for hover effect */
-  }
+    .icon-button {
+      background: #f0f0f0;
+      border: 1px solid #ccc;
+      border-radius: 50%;
+      padding: 10px;
+      cursor: pointer;
+      outline: none;
+      transition: background 0.3s ease;
+    }
 
-  .icon-button:hover {
-    background: #e0e0e0; /* slightly darker gray when hovered */
-  }
+    .icon-button:hover {
+      background: #e0e0f0;
+    }
 
-  .icon-button svg {
-    fill: #333; /* icon color */
-    width: 24px;
-    height: 24px;
-  }
-  ul {
-    display: none;
-    list-style-type: none; /* remove bullet points */
-    padding: 0; /* remove padding */
-    margin: 0; /* remove margin */
-  }
+    .icon-button svg {
+      fill: #333;
+      width: 24px;
+      height: 24px;
+    }
 
-  ul.visible {
-    display: flex; /* use Flexbox */
-    flex-direction: column; /* stack items vertically */
-    gap: 10px; /* space between items */
-  }
+    ul {
+      display: none;
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
 
-  ul.visible li {
-    padding: 10px; /* space inside each item */
-  background: #f0f0f0; /* light gray background */
-  border: 1px solid #ccc; /* gray border */
-  border-radius: 5px; /* rounded corners */
-  max-width: 300px; /* maximum width */
-  }
+    ul.visible {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    ul.visible li {
+      padding: 10px;
+      background: #f0f0f0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      max-width: 300px;
+    }
   `;
 
   constructor() {
@@ -61,6 +62,7 @@ class NotificationComponent extends LitElement {
         console.log('Connection started!');
         this.connection.on('ReceiveMessage', (reference, notificationKey) => {
           if (reference === this.currentLoggedUserId) {
+            console.log('ReceiveMessage: ', reference, notificationKey);
             const newNotification = { reference, notificationKey };
             this.notifications = [...this.notifications, newNotification];
             localStorage.setItem('notifications', JSON.stringify(this.notifications));

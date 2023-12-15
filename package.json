@@ -2,7 +2,7 @@
   "name": "signalr-notification-system",
   "version": "1.0.0",
   "description": "A versatile and real-time notification system powered by SignalR, designed for seamless integration into web applications.",
-  "main": "index.js",
+  "main": "NotificationComponent.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
